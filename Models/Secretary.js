@@ -16,7 +16,6 @@ const secretarySchema = new mongoose.Schema({
     }
 });
 
-
 const Secretary = mongoose.model('Secretary', secretarySchema);
 
 module.exports = Secretary;
