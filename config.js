@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const config = {
+const env_config = {
     development: {
         app: {
             port: parseInt(process.env.PORT) || 4000,
@@ -11,4 +11,4 @@ const config = {
     }
 }
 
-module.exports = config['development'];
+module.exports = env_config['development'];

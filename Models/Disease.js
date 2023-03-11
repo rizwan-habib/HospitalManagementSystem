@@ -6,4 +6,4 @@ const DiseaseSchema = new Schema({
   description: { type: String }
 });
 
-module.exports = mongoose.model('Disease', DiseaseSchema);
+module.exports = mongoose.model('Disease', DiseaseSchema);

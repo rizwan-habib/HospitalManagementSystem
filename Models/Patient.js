@@ -1,19 +1,14 @@
 const mongoose = require('mongoose');
-const Appointment = require('./appointment');
+const {Schema} = require("mongoose");
 
 const patientSchema = new mongoose.Schema({
     user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'User',
         required: true
     },
-    disease: { type: Schema.Types.ObjectId, ref: 'Disease' }
+    disease: { type: String, ref: 'Disease' }
 });
-
-patientSchema.methods.getAppointments = async function () {
-    const appointments = await Appointment.find({ patient: this.user._id });
-    return appointments;
-}
 
 const Patient = mongoose.model('Patient', patientSchema);
 
