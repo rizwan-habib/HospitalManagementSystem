@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const env_config = require("./config");
 const authRoutes = require('./routes/auth.router');
 const patientRoutes = require('./routes/patients.router');
+const doctorRoutes=require('./routes/doctors.router')
+const secretaryRoutes=require('./routes/secretary.router')
 const morgan = require("morgan");
 // Connect to MongoDB
 mongoose.connect(env_config.db.url, {
@@ -23,7 +25,8 @@ app.use(morgan('dev'));
 
 app.use('/auth' , authRoutes)
 app.use('/patient' , patientRoutes)
-app.use('/doctor' , patientRoutes)
+app.use('/doctor' , doctorRoutes)
+app.use('/secretary' , secretaryRoutes)
 
 
 app.listen(env_config.app.port, function () {

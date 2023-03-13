@@ -3,7 +3,7 @@ const doctorModel = require('../model/Doctor');
 const appoinmentModel = require('../model/Appoinment');
 
 // Change status of Appoinment
-const changeStatusAppoinment = async (appoinmentId = '',newStatus='') => {
+const changeStatusAppoinment = async (appoinmentId = '', newStatus = '') => {
     try {
         const appoinment = await appoinmentModel.findByIdAndUpdate(
             appoinmentId,
@@ -17,6 +17,24 @@ const changeStatusAppoinment = async (appoinmentId = '',newStatus='') => {
         return { message: error.message };
     }
 };
+// Setup Profile
+const setUpProfile = async (doctorId = '', diseasesId = '', speciality = '') => {
+    try {
+
+        const doctor = await doctorModel.create({
+            user: doctorId,
+            specialty:speciality,
+            diseases: diseasesId
+        });
+        doctor.save();
+        if (doctor) {
+            return (doctor);
+        }
+    } catch (error) {
+        return { message: error.message };
+    }
+};
+
 // Get Appoinment
 const getAppoinment = async (currentUser = '') => {
     try {
@@ -45,5 +63,6 @@ const getAppoinmentofPatient = async (patientId = '') => {
 module.exports = {
     changeStatusAppoinment,
     getAppoinment,
-    getAppoinmentofPatient
+    getAppoinmentofPatient,
+    setUpProfile
 }

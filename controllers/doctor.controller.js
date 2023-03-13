@@ -13,6 +13,22 @@ const changeStatusAppoinment = async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 }
+const setUpProfile = async (req, res) => {
+    const userId = req.body.userId;
+    const diseasesId = req.body.diseasesID;
+    const speciality = req.body.speciality;
+    
+    try {
+        const doctor = await DoctorService.setUpProfile(userId, diseasesId,speciality);
+        if (doctor) {
+            res.status(200).json("success")
+        } else {
+            res.status(400).json({ message })
+        }
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+}
 
 const getAppoinment = async (req, res) => {
     const currentUser = req.body.currentUser;
@@ -45,5 +61,6 @@ const getAppoinmentofPatient = async (req, res) => {
 module.exports = {
     changeStatusAppoinment,
     getAppoinment,
-    getAppoinmentofPatient
+    getAppoinmentofPatient,
+    setUpProfile
 }

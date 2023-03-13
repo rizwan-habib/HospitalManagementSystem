@@ -1,6 +1,7 @@
 const express = require('express');
 const doctorModel = require('../model/Doctor');
 const appoinmentModel = require('../model/Appoinment');
+const patientModel = require('../model/Patient');
 
 const getDoctorsonDisease = async (disease) => {
     try {
@@ -33,6 +34,23 @@ const takeAppoinment = async (doctorId = '', date1 = '', currentUser = '', disea
         return { message: error.message };
     }
 };
+// Setup Profile
+const setUpProfile = async (patientId = '', diseaseId = '') => {
+    try {
+
+        const patient = await patientModel.create({
+            user: patientId,
+            disease: diseaseId
+        });
+        patient.save();
+        if (patient) {
+            return (patient);
+        }
+    } catch (error) {
+        return { message: error.message };
+    }
+};
+
 // Cancel Appoinment
 const cancelAppoinment = async (appoinmentId = '') => {
     try {
@@ -66,5 +84,6 @@ module.exports = {
     getDoctorsonDisease,
     takeAppoinment,
     cancelAppoinment,
-    getAppoinment
+    getAppoinment,
+    setUpProfile
 }
