@@ -79,11 +79,23 @@ const getAppoinment = async (currentUser = '') => {
         return { message: error.message };
     }
 };
+// Get Information of Patient
+const getInformation = async (patientId = '') => {
+    try {
+        const patient = await patientModel.find({ user: patientId });
 
+        if (patient) {
+            return (patient);
+        }
+    } catch (error) {
+        return { message: error.message };
+    }
+};
 module.exports = {
     getDoctorsonDisease,
     takeAppoinment,
     cancelAppoinment,
     getAppoinment,
-    setUpProfile
+    setUpProfile,
+    getInformation
 }

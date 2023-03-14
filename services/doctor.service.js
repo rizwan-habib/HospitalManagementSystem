@@ -59,10 +59,23 @@ const getAppoinmentofPatient = async (patientId = '') => {
         return { message: error.message };
     }
 };
+// Get Information of Doctor
+const getInformation = async (doctorId = '') => {
+    try {
+        const doctor = await doctorModel.find({ user: doctorId });
+
+        if (doctor) {
+            return (doctor);
+        }
+    } catch (error) {
+        return { message: error.message };
+    }
+};
 
 module.exports = {
     changeStatusAppoinment,
     getAppoinment,
     getAppoinmentofPatient,
-    setUpProfile
+    setUpProfile,
+    getInformation
 }

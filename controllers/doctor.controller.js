@@ -58,9 +58,25 @@ const getAppoinmentofPatient = async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 }
+const getInformation = async (req, res) => {
+    const doctorId = req.body.doctorId;
+
+    try {
+        const doctor = await DoctorService.getInformation(doctorId);
+        if (doctor) {
+            res.status(200).json(doctor)
+        } else {
+            res.status(400).json({ message })
+        }
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+}
+
 module.exports = {
     changeStatusAppoinment,
     getAppoinment,
     getAppoinmentofPatient,
-    setUpProfile
+    setUpProfile,
+    getInformation
 }

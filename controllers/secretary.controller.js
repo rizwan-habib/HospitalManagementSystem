@@ -97,8 +97,22 @@ const updatePatient = async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 }
+const getInformation = async (req, res) => {
+    const secretaryId = req.body.secretaryId;
 
+    try {
+        const secretary = await SecreataryService.getInformation(secretaryId);
+        if (secretary) {
+            res.status(200).json(secretary)
+        } else {
+            res.status(400).json({ message })
+        }
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+}
 module.exports = {
+    getInformation,
     getDoctors,
     getPatients,
     getAppoinments,

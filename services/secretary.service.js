@@ -2,6 +2,7 @@ const express = require('express');
 const doctorModel = require('../model/Doctor');
 const patientModel = require('../model/Patient');
 const appoinmentModel = require('../model/Appoinment');
+const secretaryModel = require('../model/Secretary');
 
 
 // get patients
@@ -101,8 +102,20 @@ const updatePatient = async (patientId = '', diseaseId = '') => {
         return { message: error.message };
     }
 };
+// Get Information of Secretary
+const getInformation = async (secretaryId = '') => {
+    try {
+        const secretary = await secretaryModel.find({ user: secretaryId });
 
+        if (secretary) {
+            return (secretary);
+        }
+    } catch (error) {
+        return { message: error.message };
+    }
+};
 module.exports = {
+    getInformation,
     getDoctors,
     getPatients,
     getAppoinments,
