@@ -15,7 +15,20 @@ const getInformation = async (diseaseId = '') => {
         return { message: error.message };
     }
 };
+// Get Information of User
+const getDiseases = async () => {
+    try {
+        const diseases = await diseaseModel.find();
+
+        if (diseases) {
+            return (diseases);
+        }
+    } catch (error) {
+        return { message: error.message };
+    }
+};
+
 module.exports = {
-    
+    getDiseases,
     getInformation
 }
